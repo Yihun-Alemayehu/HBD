@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_audio_recorder2/flutter_audio_recorder2.dart';
 
-void main() {
+void main() async{
+  bool hasPermission = await FlutterAudioRecorder2.hasPermissions;
   runApp(MyApp());
 }
 
@@ -20,18 +22,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   double flameHeight = 50.0;
-  MicrophoneRecorder _recorder;
-
-  @override
-  void initState() {
-    super.initState();
-    _initMicrophone();
-  }
-
-  Future<void> _initMicrophone() async {
-    _recorder = MicrophoneRecorder()..initialize();
-    _recorder.start();
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +57,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  @override
-  void dispose() {
-    _recorder?.stop();
-    super.dispose();
-  }
 }
